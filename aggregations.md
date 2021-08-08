@@ -12,7 +12,7 @@
 {
 "$group": {
 "_id": {
-"customer": "$customer_id",
+"customer_type": "$customer_type",
 "first_name": "$first_name",
 "last_name": "$last_name"
 },
