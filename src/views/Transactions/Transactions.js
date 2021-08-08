@@ -93,18 +93,26 @@ function Transactions() {
     },
     { title: "First name", field: "first_name", readonly: true },
     { title: "Last name", field: "last_name", readonly: true },
-    {
-      title: "Amount",
-      type: "numeric",
-      field: "amount",
-      render: (rowData) => rowData.amount.toLocaleString(),
-    },
-    { title: "Transaction Type", field: "transaction_type", readonly: true },
+    { title: "Customer type", field: "customer_type", readonly: true },
     {
       title: "Created Date",
       type: "date",
       field: "created_on.$date",
+
       render: (rowData) => new Date(rowData.created_on.$date).toUTCString(),
+    },
+    {
+      title: "Transaction Type",
+      field: "transaction_type",
+      readonly: true,
+      width: 350,
+    },
+    {
+      title: "Amount",
+      type: "numeric",
+      field: "amount",
+      width: 100,
+      render: (rowData) => rowData.amount.toLocaleString(),
     },
   ];
   const [data, setData] = useState([]); //table data
@@ -229,6 +237,7 @@ function Transactions() {
         last_name: custid.last_name,
         customer_id: custid._id.$oid,
         transaction_type: transType.type,
+        customer_type: custid.customer_type,
         amount: parseInt(amountInput, 10),
         created_on: { $date: Date.now() },
       };

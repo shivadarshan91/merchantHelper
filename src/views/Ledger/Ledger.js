@@ -70,7 +70,7 @@ const api = axios.create({
 
 function Ledger() {
   var columns = [
-    { title: "Customer ID", field: "_id.customer" },
+    { title: "Customer Type", field: "_id.customer_type" },
     {
       title: "Avatar",
       render: (rowData) => (
@@ -85,21 +85,21 @@ function Ledger() {
     { title: "First name", field: "_id.first_name" },
     { title: "Last name", field: "_id.last_name" },
     {
-      title: "Credit",
-      type: "numeric",
-      field: "credit",
-      render: (rowData) => rowData.credit.toLocaleString(),
-    },
-    {
       title: "Debit",
       type: "numeric",
       field: "debit",
       render: (rowData) => rowData.debit.toLocaleString(),
     },
     {
+      title: "Credit",
+      type: "numeric",
+      field: "credit",
+      render: (rowData) => rowData.credit.toLocaleString(),
+    },
+    {
       title: "Balance",
       type: "numeric",
-      render: (rowData) => (rowData.credit - rowData.debit).toLocaleString(),
+      render: (rowData) => (rowData.debit - rowData.credit).toLocaleString(),
     },
   ];
   const [data, setData] = useState([]);
@@ -223,17 +223,17 @@ function Ledger() {
                   <Grid item xs={2}></Grid>
                   <Grid item xs={3}>
                     <Typography variant="subtitle1" gutterBottom>
-                      Total Credit: <b>{credit.toLocaleString()}</b>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={3}>
-                    <Typography variant="subtitle1" gutterBottom>
                       Total Debit: <b>{debit.toLocaleString()}</b>
                     </Typography>
                   </Grid>
                   <Grid item xs={3}>
                     <Typography variant="subtitle1" gutterBottom>
-                      Total Balance: <b>{(credit - debit).toLocaleString()}</b>
+                      Total Credit: <b>{credit.toLocaleString()}</b>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Typography variant="subtitle1" gutterBottom>
+                      Total Balance: <b>{(debit - credit).toLocaleString()}</b>
                     </Typography>
                   </Grid>
                 </Grid>
