@@ -99,7 +99,18 @@ function Ledger() {
     {
       title: "Balance",
       type: "numeric",
-      render: (rowData) => (rowData.debit - rowData.credit).toLocaleString(),
+      //render: (rowData) => (rowData.debit - rowData.credit).toLocaleString(),
+      render: (rowData) => {
+        return rowData.debit - rowData.credit < 0 ? (
+          <p style={{ color: "#e82222", fontWeight: "bold" }}>
+            {(rowData.debit - rowData.credit).toLocaleString()}
+          </p>
+        ) : (
+          <p style={{ color: "#008240", fontWeight: "bold" }}>
+            {(rowData.debit - rowData.credit).toLocaleString()}
+          </p>
+        );
+      },
     },
   ];
   const [data, setData] = useState([]);
@@ -233,7 +244,7 @@ function Ledger() {
                   </Grid>
                   <Grid item xs={3}>
                     <Typography variant="subtitle1" gutterBottom>
-                      Total Balance: <b>{(debit - credit).toLocaleString()}</b>
+                      Total Balance: <b> {(debit - credit).toLocaleString()}</b>
                     </Typography>
                   </Grid>
                 </Grid>
